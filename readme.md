@@ -1,10 +1,10 @@
 # Indice
-- [ELK Stack (Elastic Stack)](#elk---elastic-stack)
+- [ELK Stack (Elastic Stack)](#elk-(elastic-stack))
 
 
 <br />
 
-# ELK - Elastic Stack
+# ELK (Elastic Stack)
 Se compone por varios comopentes:
 - Elastic Search
 - Log Stash
@@ -27,7 +27,9 @@ Interface grafico, mediante el cual vamos a poder ver esos datos de diferentes f
 Diferentes graficas, el link es https://www.elastic.co/kibana <br/>
 
 ### Beats
-Agente que se empezo a implementar con las ultimas versiones, nos permite enviar los datos a una estancia central. Tiene una familia de implementaciones como **filebeat** para archivos<br /><br />
+Agente que se empezo a implementar con las ultimas versiones, nos permite enviar los datos a una estancia central. Tiene una familia de implementaciones como **filebeat** para archivos<br />
+https://www.elastic.co/beats/
+<br /><br />
 
 ### Infra
 Infraestructura clasica<br />
@@ -72,8 +74,8 @@ cd /etc/filebeat/
 nano filebeat.yml # Vamos a editar este fichero, que tiene la configuracion
 ```
 Podemos excluir lineas, incluir lineas, excluir ficheros (lo activamos), podemos agregar diferentes niveles de debug, podempos darle un nombre (sino recibe el hostname de la instancia), campos adicionales como env<br />
-Vamos a mandar todo lo que concida con la cadena **/var/log/*log**<br />
-En el fichero, en **paths** colocamos **/var/log/*log**<br />
+Vamos a mandar todo lo que concida con la cadena /var/log/*log<br />
+En el fichero, en **paths** colocamos /var/log/*log (podemos agregar varios uno abajo del otro)<br />
 Todo los logs de ese fichero los va a enciar, salvo los .gz<br />
 Tenemos la parte de la salidas, podemos mandar los ficheron a elasticsearch o a un logstash. Podemos agregarle
 seguridad para acceder con un ssl o con un usuario y password (para uno o para otro)<br />
@@ -104,10 +106,40 @@ logger -t test hello # Agrego un log para ver como crene el JSON y manda los dat
 - Le agregamos filebeat-* (todos los indices que empiezan con **filebeat**)
 - Crear
 - Vamos a Discover y vemos que ya tenemos datos
+  - Kibana indica que cada linea del log va a ser un campo diferente
+  - Podemos agregar diferentes campos
 
+### Creamos una nueva instancia EC2
+Creamos una instancia identica a la que generamos antes
 
+- Instalamos **filebeat**
+- Hacemos lo mismo que hicimos en el anterior
+  - Hacemos el curl para instalarlo
+  - editamos el fichero de configuracuib **filebeat.yml**
+  - paths y salidas igual que la primera instalacion
+  - y cambiamos el nombe a web02 (dejar un espacio entre el name: y el nombre, name: web02)
+  - ejecutamos **service filebeat start**
+  - vemos el status **service filebeat status** para ver si levanto bien
 
+### Kibana
+Vemos ahora como vienen del beat.name web02
+
+- Vamos a Dashboard, creamos uno nuevo en save
+- vamos a Open y lo vemos
+- Vamos a elementos de visualizacion y seleccionamos alguno, como el pie
+- Lo creamos sobre un indice filebeat.*
+- Puedo añadir valores
+- Agregamos un termino para separar
+- Voy al Dashboard, le doy **add** y puedo añadirlo, puedo cambiar el tamaño, etc..
+- Puedo elegir si puedo ver, ultimos 15, ultimos 30, ultimo años, etc..
+- Para hacer campos personalizados utilizariamos **logstash**
+- CReamos otro Pie
+- termino por el sorce para saber por que log vienen
+- podemos buscar de una manera compleja las visualizaciones
+- En management podemos ver el lenguaje de las busquedas
+
+<br />
 https://www.youtube.com/watch?v=tcB3Gc5Oycg&t=320s
 
-<br />En 40:00
+
 
