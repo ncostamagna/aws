@@ -1,6 +1,6 @@
 # Indice
 - [ELK Stack (Elastic Stack)](#elk-(elastic-stack))
-
+- [CloudFront](#cloudfront)
 
 <br />
 
@@ -139,7 +139,37 @@ Vemos ahora como vienen del beat.name web02
 - En management podemos ver el lenguaje de las busquedas
 
 <br />
-https://www.youtube.com/watch?v=tcB3Gc5Oycg&t=320s
 
+# CloudFront
+Me permite cachear el continido estatico de mi aplicacion, mejora mucho la latensia.<br />
+El objetivo es cachear el contenido en todos los Edge de AWS, para que el contenido este mas cerca de donde la persona se esta conectando y solucionar el tema de la latensia<br />
+<br />
+Hay 2 contenidos:
+- RTMP: mas para contenido multimedia, Streaming, videos, etc..
+- Web: archivos, ficheros, etc..
+<br /><br />
+
+TTL (Time To Live):
+- Minimo TTL: contenido en segundos
+- Maximo TTL: 
+- Default TTL: 24h -> significa que mi CF va a cachear por defecto 24horas
+<br /><br />
+Podemos poner un Firewall, certificados<br />
+Tarda entre 5 y 10 minutos
+<br /><br />
+
+**Pasos a seguir**
+- Creamos un S3
+- subimos un index.html y una imagen para probar
+- Vamos a CloudFront
+- damos click a Create Distribution
+- Podemos elegir contenido estatico (web) o RTMP, elegimos Web
+- Elegimos el dominio, el s3 que creamos
+- Damos yeas a Restrict Bucket access
+- Create a new Identity
+- Grant Read permissions (yes)
+- Crear districucion
+
+<br />
 
 
