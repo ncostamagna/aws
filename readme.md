@@ -1,7 +1,7 @@
 # Indice
 - [ELK Stack (Elastic Stack)](#elk-(elastic-stack))
 - [CloudFront](#cloudfront)
-
+- [ElatiCache](#elasticache)
 <br />
 
 # ELK (Elastic Stack)
@@ -173,3 +173,14 @@ Tarda entre 5 y 10 minutos
 <br />
 
 
+# ElastiCache
+
+### MemCached
+Base de datos en memoria ram para cachear los datos y que la obtencion de ellos sea
+mucho mas rapida, trabaja con Clave-Valor al igual que Redis<br />
+Pero el mantenimiendo de todo esto puede ser muy desafiante, por eso aparece **ElastiCache**<br />
+**ElastiCache** es un full managed de MemCached que nos permite administrar tareas,
+mucho mas facil de escalar
+
+![Events](images/003.png)
+<br />
