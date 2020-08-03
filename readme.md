@@ -183,4 +183,24 @@ Pero el mantenimiendo de todo esto puede ser muy desafiante, por eso aparece **E
 mucho mas facil de escalar
 
 ![Events](images/003.png)
+
+### Crear Redis Cluster con ElastiCache
+Como crear una Cluster de Redir con ElastiCache
+
+- Vamos a ElastiCache
+- Create Cluster
+- Elegimos Redis
+- Agregamos Nombre, descripcion, version, puerto
+- Node Type, el timpo de almacenamiento (elegimos t2.micro, una chiquita)
+- Removemos el check de Enable automatic backups
+- Maintenance, seleccionar No preference y Disable notifications
+- Creamos un security groups ( en EC2 )
+  - Le agregamos el perto 6379
+  - AnyWhere
+
+
+<br /><br />
+**Redis** es mas potente y rapido que **MemCached**
+
+
 <br />
