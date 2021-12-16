@@ -1,8 +1,28 @@
 # Indice
-- [ELK Stack (Elastic Stack)](#elk-(elastic-stack))
+- [ELK (Elastic Stack)](#elk--elastic-stack-)
+    + [Elastic Search](#elastic-search)
+    + [Log Stash](#log-stash)
+    + [Kibana](#kibana)
+    + [Beats](#beats)
+    + [Infra](#infra)
+    + [Creamos un nuevo ElasticSearch](#creamos-un-nuevo-elasticsearch)
+    + [Creamos una instancia EC2](#creamos-una-instancia-ec2)
+    + [Abrimos Kibana](#abrimos-kibana)
+    + [Creamos una nueva instancia EC2](#creamos-una-nueva-instancia-ec2)
+    + [Kibana](#kibana-1)
 - [CloudFront](#cloudfront)
-- [ElatiCache](#elasticache)
+- [ElastiCache](#elasticache)
+    + [MemCached](#memcached)
+    + [Crear Redis Cluster con ElastiCache](#crear-redis-cluster-con-elasticache)
 - [SSM](#ssm)
+  * [Instalacion](#instalacion)
+  * [Configuracion](#configuracion)
+  * [Conexion](#conexion)
+- [AppSync](#appsync)
+  * [Schema](#schema)
+  * [Resolver](#resolver)
+  * [Mutacion](#mutacion)
+  
 <br />
 
 # ELK (Elastic Stack)
@@ -278,3 +298,21 @@ aws ssm start-session --target i-0abc745d6655e1acf --region us-east-1
 Podemos tener un sincronizador de nuestras apps que se encargue de orquestar nuestros microservicios en base a los request, y pegarle a los diferentes landas que tengamos, lo manejamos como graphQL<br />
 
 ![Events](images/004.png)<br />
+
+## Schema
+
+Entidades a definir
+```py
+input Entity {
+  animal_name: String! # ! -> es requerido
+  kind: String!
+  age: String
+}
+```
+A cada campo le puedo definir un resolver y un origen de datos
+
+## Resolver
+Intermediario, que parte del esquema tengo que conectar con que origen de datos<br />
+
+## Mutacion
+Cuando realizamos una modificacion de los campos 
