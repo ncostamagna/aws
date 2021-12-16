@@ -2,6 +2,7 @@
 - [ELK Stack (Elastic Stack)](#elk-(elastic-stack))
 - [CloudFront](#cloudfront)
 - [ElatiCache](#elasticache)
+- [SSM](#ssm)
 <br />
 
 # ELK (Elastic Stack)
@@ -204,3 +205,76 @@ Como crear una Cluster de Redir con ElastiCache
 
 
 <br />
+
+# SSM
+
+## Instalacion
+
+Instalar https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#install-plugin-linux
+<br />
+Pasos:
+
+```sh
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+
+sudo dpkg -i session-manager-plugin.deb
+
+```
+
+## Configuracion
+
+Realizo la configuracion indicando las credenciales
+```sh
+aws configure # Siempre te lo agrega como default
+```
+
+- va a generar una carpeta credentials en el usuario
+- us-east-1
+- cd .aws/
+- vemos las credentials y la config
+    - credentials: las credenciales que colocamos
+    - config: zona y formato
+    - si queremos utilizar varias credenciales tenemos que agregar entre corchetes un nombre para identificar esas credenciales (tanto en credentials como config)
+
+```sh
+aws s3 ls --profile vaulty-test # indicamos que profile queremos usar
+```
+
+## Conexion
+
+```sh
+aws ssm describe-instance-information --region us-east-1 --filters "Key=tag:Name,Values=G-QA-CORE-VAULTY" --profile vaulty-test
+
+aws ssm describe-instance-information --region us-east-1 --filters "Key=tag:Name,Values=G-QA-CORE-VAULTY"
+```
+Nos va a mostrar la siguiente info
+```json
+{
+    "InstanceInformationList": [
+        {
+            "InstanceId": "i-0abc745d6655e1acf",
+            "PingStatus": "Online",
+            "LastPingDateTime": "2020-09-02T11:06:25.507000-03:00",
+            "AgentVersion": "2.3.978.0",
+            "IsLatestVersion": false,
+            "PlatformType": "Linux",
+            "PlatformName": "Ubuntu",
+            "PlatformVersion": "20.04",
+            "ResourceType": "EC2Instance",
+            "IPAddress": "172.31.62.223",
+            "ComputerName": "ip-172-31-62-223.ec2.internal"
+        }
+    ]
+}
+```
+Debemos tener presente el Instance ID que vamos a usar para conectarnos
+
+```ssh
+aws ssm start-session --target i-0abc745d6655e1acf --region us-east-1
+```
+
+
+# AppSync
+Podemos tener un sincronizador de nuestras apps que se encargue de orquestar nuestros microservicios en base a los request, y pegarle a los diferentes landas que tengamos, lo manejamos como graphQL<br />
+
+![Events](images/004.png)<br />
