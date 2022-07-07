@@ -1,0 +1,18 @@
+ir a -> https://swapi.apis.guru/
+en query:root vemos toda la informacion
+
+{
+    #La identificacion de ese personaje
+    person(personID: 1){
+        name
+        birthYear
+        homeworld {
+            name
+        },
+        filmConnection {
+            films {
+                title
+            }
+        }
+    }
+}
